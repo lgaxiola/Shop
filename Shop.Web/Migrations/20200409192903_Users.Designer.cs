@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Shop.Web.Data;
 
 namespace Shop.Web.Migrations
 {
     [DbContext(typeof(DataContext))]
-    partial class DataContextModelSnapshot : ModelSnapshot
+    [Migration("20200409192903_Users")]
+    partial class Users
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -129,19 +131,6 @@ namespace Shop.Web.Migrations
                     b.ToTable("AspNetUserTokens");
                 });
 
-            modelBuilder.Entity("Shop.Web.Data.Entities.Country", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<string>("Name");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("Countries");
-                });
-
             modelBuilder.Entity("Shop.Web.Data.Entities.Product", b =>
                 {
                     b.Property<int>("Id")
@@ -173,7 +162,7 @@ namespace Shop.Web.Migrations
                     b.ToTable("Products");
                 });
 
-            modelBuilder.Entity("Shop.Web.Data.Entities.User", b =>
+            modelBuilder.Entity("Shop.Web.Data.User", b =>
                 {
                     b.Property<string>("Id")
                         .ValueGeneratedOnAdd();
@@ -238,7 +227,7 @@ namespace Shop.Web.Migrations
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserClaim<string>", b =>
                 {
-                    b.HasOne("Shop.Web.Data.Entities.User")
+                    b.HasOne("Shop.Web.Data.User")
                         .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade);
@@ -246,7 +235,7 @@ namespace Shop.Web.Migrations
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserLogin<string>", b =>
                 {
-                    b.HasOne("Shop.Web.Data.Entities.User")
+                    b.HasOne("Shop.Web.Data.User")
                         .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade);
@@ -259,7 +248,7 @@ namespace Shop.Web.Migrations
                         .HasForeignKey("RoleId")
                         .OnDelete(DeleteBehavior.Cascade);
 
-                    b.HasOne("Shop.Web.Data.Entities.User")
+                    b.HasOne("Shop.Web.Data.User")
                         .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade);
@@ -267,7 +256,7 @@ namespace Shop.Web.Migrations
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserToken<string>", b =>
                 {
-                    b.HasOne("Shop.Web.Data.Entities.User")
+                    b.HasOne("Shop.Web.Data.User")
                         .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade);
@@ -275,7 +264,7 @@ namespace Shop.Web.Migrations
 
             modelBuilder.Entity("Shop.Web.Data.Entities.Product", b =>
                 {
-                    b.HasOne("Shop.Web.Data.Entities.User", "User")
+                    b.HasOne("Shop.Web.Data.User", "User")
                         .WithMany()
                         .HasForeignKey("UserId");
                 });
